@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Matrix=()=>{
-    const [ans,setAns]=useState("Ans Will Be Displayed Here")
+    const [ans,setAns]=useState("Ans Will Be Displayed Here");
+    const ListofInput=["Gym","Office","Resturant","Store","Hospital"];
     const [arr,setArr]=useState([
         [],
         [],        [],
@@ -25,7 +26,7 @@ const Matrix=()=>{
     ])
     const [housePos,setHousePos]=useState([{}])
     const addValue=(index)=>{
-        const val = prompt('Type Home/Gym/Office/Resturant/Store');
+        const val = prompt('Type House:id/Gym/Office/Resturant/Store');
         setArr(arr=>{
             if(val){
             if(val.startsWith("House")){
@@ -42,10 +43,17 @@ const Matrix=()=>{
                         "Hospital":10000,
                     }
                 ])
+                arr[index]=[...arr[index],val];
+                arr[index]=[...new Set(arr[index])]
             }
+            else if(ListofInput.indexOf(val)==-1){
+                alert("You can only add House:id/Gym/Office/Resturant/Store/Hospital in each box")
+            }
+            else{
             arr[index]=[...arr[index],val];
             arr[index]=[...new Set(arr[index])]
              }
+            }
               return [...arr];
         })  
     }
@@ -132,5 +140,8 @@ const Card=styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
+    text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap;
 `;
 export default Matrix;
